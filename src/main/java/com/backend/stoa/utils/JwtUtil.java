@@ -19,7 +19,7 @@ public class JwtUtil {
 
     private int JWT_EXPIRATION_TIME = 100 * 60 * 60;
 
-    private String JWT_SECRET = "oYdmMqiysWb11whE8rNa1Uz84hB66f5i";
+    private String JWT_SECRET = "eYdmMqhysdb21rhy8rNd1Fz88hB16f5i";
 
     private Key KEY;
 

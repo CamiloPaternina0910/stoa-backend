@@ -5,6 +5,7 @@ import com.backend.stoa.dtos.responses.IngenieroDtoResponse;
 import com.backend.stoa.dtos.responses.Response;
 import com.backend.stoa.dtos.responses.factories.GeneralListResponseImp;
 import com.backend.stoa.dtos.responses.factories.GeneralResponseImp;
+import com.backend.stoa.dtos.responses.factories.ObjectResponseImp;
 import com.backend.stoa.dtos.responses.factories.ResponseFactory;
 import com.backend.stoa.entities.Ingeniero;
 import com.backend.stoa.mappers.IngenieroMapper;
@@ -67,6 +68,12 @@ public class IngenierosControlador {
         ingenieroService.eliminar(ingenieroService.encontrarPorId(id));
 
         responseFactory = new GeneralResponseImp("Ingeniero eliminado.", false, 200);
+        return new ResponseEntity<>(responseFactory.getResponse(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response> buscarIngeniero(@PathVariable Long id){
+        responseFactory = new ObjectResponseImp(ingenieroService.encontrarPorId(id), 200, false);
         return new ResponseEntity<>(responseFactory.getResponse(), HttpStatus.OK);
     }
 }
