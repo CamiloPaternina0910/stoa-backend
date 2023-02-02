@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "ingenieros")
@@ -30,4 +32,15 @@ public class Ingeniero implements Serializable {
 
     @NotEmpty(message = "La foto de perfil es requerida")
     private String fotoPerfil;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "ingenieros")
+    private Set<Proyecto> proyectos = new HashSet<>();
+
+    void agregarProyecto(Proyecto proyecto){
+        proyectos.add(proyecto);
+    }
+
+    void eliminarProyecto(Proyecto proyecto){
+        proyectos.remove(proyecto);
+    }
 }

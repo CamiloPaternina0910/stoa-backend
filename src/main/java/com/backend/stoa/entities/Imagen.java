@@ -20,6 +20,4 @@ public class Imagen implements Serializable {
     @NotEmpty(message = "La ruta de la imagen debe ser requerida")
     private String url;
 
-    @ManyToOne
-    private Proyecto proyecto;
 }

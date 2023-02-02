@@ -40,10 +40,11 @@ public class Proyecto implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
     private Set<Producto> productos = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto")
-    private Set<Imagen> imagenes = new HashSet<>();
+    private String imagen;
 
-    @ManyToMany
+    private String archivo;
+
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Ingeniero> ingenieros = new HashSet<>();
 
     public void agregarProducto(Producto producto){
@@ -52,14 +53,6 @@ public class Proyecto implements Serializable {
 
     public void eliminarProducto(Producto producto){
         productos.remove(producto);
-    }
-
-    public void agregarImagen(Imagen imagen){
-        imagenes.add(imagen);
-    }
-
-    public void eliminarImagen(Imagen imagen){
-        imagenes.remove(imagen);
     }
 
     public void agregarIngeniero(Ingeniero ingeniero){

@@ -37,7 +37,7 @@ public class AutenticacionControlador {
     private ResponseFactory responseFactory;
 
     @PostMapping("/login")
-    public ResponseEntity<Response> createToken(@Valid @RequestBody LoginRequest request) {
+    public ResponseEntity<Response> login(@Valid @RequestBody LoginRequest request) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(request.getUsername(), request.getClave());
         authenticationManager.authenticate(authenticationToken);
         UserDetails userDetails = usuarioService.loadUserByUsername(request.getUsername());

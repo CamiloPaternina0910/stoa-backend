@@ -34,6 +34,9 @@ public class Credito implements Serializable {
 
     private BigDecimal precio;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cliente usuario;
+
     @ManyToOne
     private Producto producto;
 
