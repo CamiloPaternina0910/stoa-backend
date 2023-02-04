@@ -20,6 +20,9 @@ public class IngenieroDtoRequest {
     @NotEmpty(message = "Los apellidos son requeridos")
     private String apellidos;
 
+    @NotEmpty(message = "El cargo es requerido")
+    private String cargo;
+
     @Email(message = "El formato email es requerido")
     @NotNull(message = "El email es requerdio")
     private String email;

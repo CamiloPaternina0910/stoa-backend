@@ -26,6 +26,9 @@ public class Ingeniero implements Serializable {
     @NotEmpty(message = "El apellido del ingeniero es requerido")
     private String apellidos;
 
+    @NotEmpty(message = "El cargo es requerido")
+    private String cargo;
+
     @Email(message = "Debe contener el formato email")
     @NotEmpty(message = "El email es requerido")
     private String email;

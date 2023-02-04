@@ -39,7 +39,13 @@ public class WebConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/v1/login").permitAll()
                         .requestMatchers("/api/v1/register").permitAll()
-                        .requestMatchers("/api/v1/auth/proyectos/todos", "/api/v1/auth/proyectos/{id}/imagen").permitAll()
+                        .requestMatchers(
+                                "/api/v1/auth/proyectos/todos",
+                                "/api/v1/auth/proyectos/{id}/imagen",
+                                "/api/v1/auth/proyectos/{id}/pdf",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
