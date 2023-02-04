@@ -1,7 +1,6 @@
 package com.backend.stoa.dtos.responses.factories;
 
 import com.backend.stoa.dtos.responses.Response;
-import com.universidad.web.responses.Response;
 
 import java.time.LocalDate;
 import java.util.List;

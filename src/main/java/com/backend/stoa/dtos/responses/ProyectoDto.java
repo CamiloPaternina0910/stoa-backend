@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.core.io.InputStreamResource;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProyectoDto {
+public class ProyectoDto implements Serializable {
 
     private Long id;
 
@@ -24,9 +25,5 @@ public class ProyectoDto {
     private LocalDate fecha_inicio;
 
     private String lugar;
-
-    private InputStreamResource file;
-
-    private InputStreamResource imagen;
 
 }

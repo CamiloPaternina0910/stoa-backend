@@ -55,18 +55,20 @@ public class IngenierosControlador {
     @PostMapping("/nuevo")
     public ResponseEntity<Response> crearNuevoIngeniero(@Valid @RequestBody IngenieroDtoRequest request, @RequestParam("imagen") MultipartFile fotoPerfil) throws IOException {
         Ingeniero ingeniero = ingenieroMapper.toEntity(request);
-        SubidaArchivosUtil subida = new SubidaArchivosUtil(fotoPerfil);
-        ingeniero.setFotoPerfil(subida.copyFileToUploads());
+        SubidaArchivosUtil subida = new SubidaArchivosUtil();
+        subida.setFile(fotoPerfil);
+        ingeniero.setFotoPerfil(subida.subirImagen());
         ingenieroService.guardar(ingeniero);
-
         responseFactory = new GeneralResponseImp("Ingeniero creado.", false, 200);
         return new ResponseEntity<>(responseFactory.getResponse(), HttpStatus.OK);
     }
 
     @PostMapping("/eliminar/{id}")
     public ResponseEntity<Response> eliminarIngeniero(@PathVariable Long id){
-        ingenieroService.eliminar(ingenieroService.encontrarPorId(id));
-
+        Ingeniero ingeniero = ingenieroService.encontrarPorId(id);
+        SubidaArchivosUtil subidaArchivosUtil = new SubidaArchivosUtil();
+        subidaArchivosUtil.eliminarImagen(ingeniero.getFotoPerfil());
+        ingenieroService.eliminar(ingeniero);
         responseFactory = new GeneralResponseImp("Ingeniero eliminado.", false, 200);
         return new ResponseEntity<>(responseFactory.getResponse(), HttpStatus.OK);
     }

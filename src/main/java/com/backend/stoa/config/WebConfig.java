@@ -39,6 +39,7 @@ public class WebConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/v1/login").permitAll()
                         .requestMatchers("/api/v1/register").permitAll()
+                        .requestMatchers("/api/v1/auth/proyectos/todos", "/api/v1/auth/proyectos/{id}/imagen").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

@@ -23,6 +23,7 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 public class ClienteControlador {
+/*
 
     private ResponseFactory responseFactory;
 
@@ -43,5 +44,6 @@ public class ClienteControlador {
         return new ResponseEntity<>(responseFactory.getResponse(), HttpStatus.OK);
     }
 
+*/
 
 }

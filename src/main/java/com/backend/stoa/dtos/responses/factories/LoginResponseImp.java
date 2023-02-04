@@ -2,8 +2,6 @@ package com.backend.stoa.dtos.responses.factories;
 
 import com.backend.stoa.dtos.responses.LoginData;
 import com.backend.stoa.dtos.responses.Response;
-import com.universidad.web.responses.LoginData;
-import com.universidad.web.responses.Response;
 import org.springframework.http.HttpStatus;
 
 import java.time.LocalDate;
