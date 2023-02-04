@@ -18,8 +18,8 @@ public class IngenieroDtoResponse {
 
     private String apellidos;
 
-    private String email;
+    private String cargo;
 
-    private InputStreamResource imagen;
+    private String email;
 
 }
