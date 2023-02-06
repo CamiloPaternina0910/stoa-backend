@@ -13,16 +13,18 @@ import com.backend.stoa.utils.SubidaArchivosUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -70,25 +72,23 @@ public class ProyectoControlador {
     }
 
     @GetMapping("/{id}/imagen")
-    public void getImagen(@PathVariable Long id, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Resource> getImagen(@PathVariable Long id, HttpServletResponse response) throws IOException {
         Proyecto proyecto = proyectoService.encontrarPorId(id);
         Path path = Paths.get("uploads/imagenes").resolve(proyecto.getImagen()).toAbsolutePath();
         File file = new File(path.toUri());
-        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-        response.setContentType("application/force-download");
-        response.addHeader("Content-disposition", "attachment;fileName=" + proyecto.getImagen());
-        FileCopyUtils.copy(inputStream, response.getOutputStream());
+        Resource resource = new UrlResource(file.toURI());
+        String contentType = Files.probeContentType(resource.getFile().toPath());
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, contentType).body(resource);
     }
 
     @GetMapping("/{id}/pdf")
-    public void getPdf(@PathVariable Long id, HttpServletResponse response) throws IOException {
+    public ResponseEntity<Resource> getPdf(@PathVariable Long id, HttpServletResponse response) throws IOException {
         Proyecto proyecto = proyectoService.encontrarPorId(id);
         Path path = Paths.get("uploads/pdfs").resolve(proyecto.getArchivo()).toAbsolutePath();
         File file = new File(path.toUri());
-        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
-        response.setContentType("application/force-download");
-        response.addHeader("Content-disposition", "attachment;fileName=" + proyecto.getArchivo());
-        FileCopyUtils.copy(inputStream, response.getOutputStream());
+        Resource resource = new UrlResource(file.toURI());
+        String contentType = Files.probeContentType(resource.getFile().toPath());
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, contentType).body(resource);
     }
 
     @PostMapping("/eliminar/{id}")
