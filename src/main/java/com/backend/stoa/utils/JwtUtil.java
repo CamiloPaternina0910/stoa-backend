@@ -17,7 +17,7 @@ public class JwtUtil {
 
     private static final String AUTHORITIES = "authorization";
 
-    private int JWT_EXPIRATION_TIME = 100 * 60 * 60;
+    private int JWT_EXPIRATION_TIME = 6400 * 60 * 60;
 
     private String JWT_SECRET = "eYdmMqhysdb21rhy8rNd1Fz88hB16f5i";
 
