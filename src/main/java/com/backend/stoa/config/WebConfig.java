@@ -2,6 +2,7 @@ package com.backend.stoa.config;
 
 
 import com.backend.stoa.filters.JwtAuthFilter;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Configuration
 public class WebConfig {
@@ -52,4 +58,11 @@ public class WebConfig {
         return http.build();
     }
 
+    @PostConstruct
+    public void init() throws IOException {
+        Path rutaRaiz = Paths.get("upload/imagenes");
+        Path rutaRaiz2 = Paths.get("upload/pdfs");
+        Files.createDirectories(rutaRaiz);
+        Files.createDirectories(rutaRaiz2);
+    }
 }
